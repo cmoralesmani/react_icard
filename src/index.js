@@ -8,9 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 import './scss/global.scss';
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  // </React.StrictMode>
+  ,
   document.getElementById('root')
 );
 

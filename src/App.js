@@ -2,9 +2,11 @@ import React from "react";
 import { ToastContainer } from "react-toastify";
 import { Navigation } from "./routes";
 
+import { AuthProvider } from "./context"
+
 export default function App() {
   return (
-    <div>
+    <AuthProvider>
       <Navigation />
       <ToastContainer
         position="bottom-center"
@@ -17,6 +19,6 @@ export default function App() {
         draggable
         pauseOnHover={false}
       />
-    </div>
+    </AuthProvider>
   );
 }
