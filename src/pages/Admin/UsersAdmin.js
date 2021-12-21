@@ -1,9 +1,9 @@
 import React from 'react'
 
-export function HomeAdmin() {
+export function UsersAdmin() {
     return (
         <div>
-            <h1>Home Admin</h1>
+            <h1>Estamos en Users Admin</h1>
         </div>
     )
 }

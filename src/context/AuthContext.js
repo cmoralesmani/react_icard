@@ -24,7 +24,6 @@ export function AuthProvider(props) {
             else {
                 setAuth(null)
             }
-            console.log(token);
         })()
     }, [])
 

@@ -11,7 +11,6 @@ import "./LoginForm.scss";
 export function LoginForm() {
     const { login } = useAuth();
 
-    console.log(useAuth())
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
