@@ -3,15 +3,25 @@ import { Form, Button, Checkbox } from "semantic-ui-react"
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
+import { useUser } from "../../../../hooks"
 import "./AddEditUserForm.scss"
 
-export function AddEditUserForm() {
+export function AddEditUserForm(props) {
+    const { onClose, onRefetch } = props;
+    const { addUser } = useUser()
+
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(newSchema()),
         validateOnChange: false,
-        onSubmit: formValue => {
-            console.log(formValue)
+        onSubmit: async formValue => {
+            try {
+                await addUser(formValue)
+                onRefetch()
+                onClose()
+            } catch (error) {
+                console.error(error)
+            }
         }
     });
     return (
