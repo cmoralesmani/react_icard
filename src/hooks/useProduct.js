@@ -1,10 +1,12 @@
 import { useState } from "react"
-import { getProductsApi } from "../api/product"
+import { getProductsApi, addProductApi } from "../api/product"
+import { useAuth } from "./"
 
 export function useProduct() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [products, setProducts] = useState(null);
+    const { auth } = useAuth();
 
     const getProducts = async () => {
         try {
@@ -13,6 +15,19 @@ export function useProduct() {
             setLoading(false);
             setProducts(result);
         } catch (error) {
+            setLoading(false);
+            setError(error);
+        }
+    }
+
+    const addProduct = async (data) => {
+        try {
+            setLoading(true);
+            const result = await addProductApi(data, auth.token);
+            setLoading(false);
+            setProducts(result);
+        } catch (error) {
+            setLoading(false);
             setError(error);
         }
     }
@@ -22,5 +37,6 @@ export function useProduct() {
         error,
         products,
         getProducts,
+        addProduct,
     }
 }
