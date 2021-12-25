@@ -18,7 +18,7 @@ export function TableCategoryAdmin(props) {
             <Table.Body>
                 {map(categories, (category, index) => (
                     <Table.Row key={index}>
-                        <Table.Cell>
+                        <Table.Cell width={2}>
                             <Image src={category.image} />
                         </Table.Cell>
                         <Table.Cell>
