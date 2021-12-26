@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Checkbox, Icon } from "semantic-ui-react";
 import { map } from "lodash";
 
@@ -7,6 +7,31 @@ import "./TablesListAdmin.scss";
 
 export function TablesListAdmin(props) {
   const { tables } = props;
+  const [reload, setReload] = useState(false);
+  const [autoReload, setAutoReload] = useState(false);
+
+  const onReload = () => setReload((prev) => !prev);
+
+  useEffect(() => {
+    if (autoReload) {
+      const autoReloadAction = () => {
+        onReload();
+
+        setTimeout(() => {
+          autoReloadAction();
+        }, 5000);
+      };
+      autoReloadAction();
+    }
+  }, [autoReload]);
+
+  const onCheckAutoReload = (check) => {
+    if (check) {
+      setAutoReload(check);
+    } else {
+      window.location.reload();
+    }
+  };
 
   return (
     <div className="tables-list-admin">
@@ -14,16 +39,19 @@ export function TablesListAdmin(props) {
         primary
         icon
         className="tables-list-admin__reload"
-        onClick={() => console.log("onrefecth")}
+        onClick={onReload}
       >
         <Icon name="refresh" />
       </Button>
       <div className="tables-list-admin__reload-toggle">
         <span>Reload automatico</span>
-        <Checkbox toggle onChange={(_, data) => console.log(data.checked)} />
+        <Checkbox
+          toggle
+          onChange={(_, data) => onCheckAutoReload(data.checked)}
+        />
       </div>
       {map(tables, (table, index) => (
-        <TableAdmin key={table.number} table={table} />
+        <TableAdmin key={table.number} table={table} reload={reload} />
       ))}
     </div>
   );
