@@ -18,7 +18,7 @@ export function SelectTable(props) {
     } else {
       const exist = await isExistTable(tableNum);
       if (exist) history.push(`/client/${tableNum}`);
-      else setError("El numero d ela mesa no existe");
+      else setError("El número de la mesa no existe");
     }
   };
 
