@@ -18,3 +18,7 @@ export function removeProductCartApi(index) {
 
   localStorage.setItem(PRODUCT_CART, JSON.stringify(idProducts));
 }
+
+export function cleanProductCartApi() {
+  localStorage.removeItem(PRODUCT_CART);
+}
